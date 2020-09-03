@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-
 puts 'Welcome to Tic Tac Toe game'
 puts
 
@@ -30,11 +29,20 @@ def generate_random_signs
 end
 
 # signs = generate_random_signs
-player_1_sign, player_2_sign = generate_random_signs
+@player_1_sign, @player_2_sign = generate_random_signs
 
 # create Player class after that initialize two objects and assign them names and signs
+@player1 = {
+  player1_name: @player_1_name,
+  player1_sign: @player_1_sign
+}
 
-puts "#{@player_1_name}(#{player_1_sign}) --vs-- #{@player_2_name}(#{player_2_sign})"
+@player2 = {
+  player2_name: @player_2_name,
+  player2_sign: @player_2_sign
+}
+
+puts "#{@player1[:player1_name]}(#{@player1[:player1_sign]}) --vs-- #{@player2[:player2_name]}(#{@player2[:player2_sign]})"
 puts
 sleep 1
 
@@ -45,26 +53,58 @@ def check_first_player(player_1_sign, player_2_sign)
 end
 
 toggler = 0
-current_player = check_first_player(player_1_sign, player_2_sign)[toggler]
+current_player = check_first_player(@player_1_sign, @player_2_sign)[toggler]
 
 # board
-# board = [
-#   [1, 2, 3],
-#   [4, 5, 6],
-#   [7, 8, 9]
-# ]
+board = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+]
+
+@wining_combinations = [
+  [1, 2, 3], [4, 5, 6], [7, 8, 9],
+  [1, 4, 7], [2, 5, 8], [3, 6, 9],
+  [1, 5, 9], [3, 5, 7]
+]
+
+def error_message
+  'Something went wrong . Please choose number from 1 to 9'
+end
+
+def validate_move(number)
+  p error_message if number < 1 || number > 9
+
+  # return unless (number < 1 || number > 9)
+end
 
 def make_move(_player, num)
+  validate_move(num)
   p num
   # replace num inside border with players sign
 end
 
-9.times do
-  # show board
-  puts "#{current_player} your turn,type number from 1 to 9"
-  board_number = gets.chomp.to_i
-  make_move(current_player, board_number)
-  # update_board  create method update board
-  # check if there is winner then break loop
-  toggler = toggler.zero? ? 1 : 0
+
+def winner?
+  output = nil
+  @wining_combinations.each do |arr|
+    
+    output = player1[:player1_sign] == 'x' ? player1[:player1_name] : player2[:player2_name] if arr == %w[x x x]
+    output = player1[:player1_sign] == 'o' ? player1[:player1_name] : player2[:player2_name] if arr == %w[o o o]
+  end
+
+  output
 end
+
+p winner?
+
+# 9.times do
+#   current_player = check_first_player(player_1_sign, player_2_sign)[toggler]
+#   # show board
+#   puts "#{current_player} your turn,type number from 1 to 9"
+#   board_number = gets.chomp.to_i
+#   make_move(current_player, board_number)
+#   # update_board  create method update board
+#   # check if there is winner then break loop
+#   toggler = toggler.zero? ? 1 : 0
+# end
