@@ -58,23 +58,29 @@ current_player = check_first_player(@player_1_sign, @player_2_sign)[toggler]
 # board
 @board = [
   [{ '1': nil }, { '2': nil }, { '3': nil }],
-  [{ '4': nil }, { '5': nil }, { '6': nil }],
+  [{ '4': nil }, { '5': 'o' }, { '6': 'x' }],
   [{ '7': nil }, { '8': nil }, { '9': nil }]
 ]
 
 def show_board
-  puts '+------------------------+'
+  puts '+---------------------------+'
 
   @board.each do |arr|
     print '|'
     arr.each do |el|
-      el.each { |key, value| print " #{key} - #{'*' unless value}  " }
+      el.each do |key, value|
+        if value
+          print " #{key} - #{value == 'x' ? "\u{274C}" : "\u2B55"}  "
+        else
+          print " #{key} - \u{1F4A9}  "
+        end
+      end
     end
     print '|'
     puts
   end
 
-  puts '+------------------------+'
+  puts '+---------------------------+'
 end
 
 show_board
@@ -91,8 +97,6 @@ end
 
 def validate_move(number)
   p error_message if number < 1 || number > 9
-
-  # return unless (number < 1 || number > 9)
 end
 
 def make_move(_player, num)
@@ -104,8 +108,7 @@ end
 def winner?
   output = nil
   @wining_combinations.each do |arr|
-    output = player1[:player1_sign] == 'x' ? player1[:player1_name] : player2[:player2_name] if arr == %w[x x x]
-    output = player1[:player1_sign] == 'o' ? player1[:player1_name] : player2[:player2_name] if arr == %w[o o o]
+    arr
   end
 
   output
