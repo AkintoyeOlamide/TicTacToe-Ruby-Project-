@@ -56,11 +56,28 @@ toggler = 0
 current_player = check_first_player(@player_1_sign, @player_2_sign)[toggler]
 
 # board
-board = [
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9]
+@board = [
+  [{ '1': nil }, { '2': nil }, { '3': nil }],
+  [{ '4': nil }, { '5': nil }, { '6': nil }],
+  [{ '7': nil }, { '8': nil }, { '9': nil }]
 ]
+
+def show_board
+  puts '+------------------------+'
+
+  @board.each do |arr|
+    print '|'
+    arr.each do |el|
+      el.each { |key, value| print " #{key} - #{'*' unless value}  " }
+    end
+    print '|'
+    puts
+  end
+
+  puts '+------------------------+'
+end
+
+show_board
 
 @wining_combinations = [
   [1, 2, 3], [4, 5, 6], [7, 8, 9],
@@ -84,11 +101,9 @@ def make_move(_player, num)
   # replace num inside border with players sign
 end
 
-
 def winner?
   output = nil
   @wining_combinations.each do |arr|
-    
     output = player1[:player1_sign] == 'x' ? player1[:player1_name] : player2[:player2_name] if arr == %w[x x x]
     output = player1[:player1_sign] == 'o' ? player1[:player1_name] : player2[:player2_name] if arr == %w[o o o]
   end
