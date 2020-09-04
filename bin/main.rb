@@ -33,16 +33,16 @@ end
 
 # create Player class after that initialize two objects and assign them names and signs
 @player1 = {
-  player1_name: @player_1_name,
-  player1_sign: @player_1_sign
+  player_name: @player_1_name,
+  player_sign: @player_1_sign
 }
 
 @player2 = {
-  player2_name: @player_2_name,
-  player2_sign: @player_2_sign
+  player_name: @player_2_name,
+  player_sign: @player_2_sign
 }
 
-puts "#{@player1[:player1_name]}(#{@player1[:player1_sign]}) --vs-- #{@player2[:player2_name]}(#{@player2[:player2_sign]})"
+puts "#{@player1[:player_name]}(#{@player1[:player_sign]}) --vs-- #{@player2[:player_name]}(#{@player2[:player_sign]})"
 puts
 sleep 1
 
@@ -57,10 +57,12 @@ current_player = check_first_player(@player_1_sign, @player_2_sign)[toggler]
 
 # board
 @board = [
-  [{ '1': nil }, { '2': nil }, { '3': nil }],
-  [{ '4': nil }, { '5': 'o' }, { '6': 'x' }],
-  [{ '7': nil }, { '8': nil }, { '9': nil }]
+  [{ '1': 'x' }, { '2': nil }, { '3': nil }],
+  [{ '4': '0' }, { '5': 'o' }, { '6': 'x' }],
+  [{ '7': 'x' }, { '8': 'o' }, { '9': 'x' }]
 ]
+
+# p ([@board[0], @board[1], @board[2]].flatten.find { |el| el.include? :'9' })
 
 def show_board
   puts '+---------------------------+'
@@ -83,8 +85,6 @@ def show_board
   puts '+---------------------------+'
 end
 
-show_board
-
 @wining_combinations = [
   [1, 2, 3], [4, 5, 6], [7, 8, 9],
   [1, 4, 7], [2, 5, 8], [3, 6, 9],
@@ -105,13 +105,30 @@ def make_move(_player, num)
   # replace num inside border with players sign
 end
 
+def get_winner_name(combinations, board, player)
+  winner_name = player[:player_name] if combinations.all? do |num|
+    finded_element_from_board = board.find { |el| el.include? :"#{num}" }
+    finded_element_from_board[:"#{num}"] == player[:player_sign]
+  end
+  winner_name
+end
+
 def winner?
-  output = nil
+  board_elements = [@board[0], @board[1], @board[2]].flatten
+
+  winner_name = nil
+
   @wining_combinations.each do |arr|
-    arr
+    winner_name = get_winner_name(arr, board_elements, @player1)
+
+    break if winner_name
+
+    winner_name = get_winner_name(arr, board_elements, @player2)
+
+    break if winner_name
   end
 
-  output
+  winner_name
 end
 
 p winner?
