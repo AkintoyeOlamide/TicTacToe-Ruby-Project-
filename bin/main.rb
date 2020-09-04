@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+
+require 'set'
+
 puts 'Welcome to Tic Tac Toe game'
 puts
 puts
@@ -9,6 +12,8 @@ puts
   [{ '4': nil }, { '5': nil }, { '6': nil }],
   [{ '7': nil }, { '8': nil }, { '9': nil }]
 ]
+
+@choosed_nums = Set.new
 
 def show_board
   puts '+---------------------------+'
@@ -38,7 +43,6 @@ def validate_name(name)
     p 'name is too short,try again'
     name = gets.chomp
   end
-
   name
 end
 
@@ -47,6 +51,14 @@ def validate_move(num)
     p 'not a valid number, please choose a number between 1 to 9'
     num = gets.chomp
   end
+
+  while @choosed_nums.include? num
+    p "#{num} is already taken, please choose another number"
+    num = gets.chomp
+  end
+
+  @choosed_nums << num
+  p @choosed_nums
   num
 end
 
@@ -57,7 +69,7 @@ puts 'Player 1 type your name'
 @player_1_name = validate_name(gets.chomp)
 puts
 
-puts 'Player 2 add your name'
+puts 'Player 2 type your name'
 
 @player_2_name = validate_name(gets.chomp)
 puts
@@ -105,7 +117,6 @@ sleep 1
 # board
 show_board
 
-
 @wining_combinations = [
   [1, 2, 3], [4, 5, 6], [7, 8, 9],
   [1, 4, 7], [2, 5, 8], [3, 6, 9],
@@ -121,6 +132,7 @@ def update_board(num, sign)
       end
     end
   end
+
   puts
   puts
   show_board
@@ -157,6 +169,8 @@ def winner?
     break if winner_name
   end
 
+  winner_name = 'Draw' if winner_name.nil? && (@choosed_nums.length == 9)
+
   winner_name
 end
 
@@ -182,4 +196,4 @@ until winner?
 
 end
 
-
+puts "#{winner?} is winner !!!"
