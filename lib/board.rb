@@ -46,10 +46,8 @@ class Board
       end
     end
 
-    puts
-    puts
+    puts "\n\n"
     show_board
-    puts
-    puts
+    puts "\n\n"
   end
 end

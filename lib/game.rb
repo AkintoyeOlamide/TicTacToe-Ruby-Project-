@@ -9,8 +9,6 @@ class Game
   extend Helper
   include Helper
 
-  attr_accessor :choosed_nums
-
   def initialize(player1, player2)
     @player1 = player1
     @player2 = player2
@@ -19,9 +17,7 @@ class Game
   end
 
   def self.show_welcome_text
-    puts 'Welcome to Tic Tac Toe game'
-    puts
-    puts
+    puts "Welcome to Tic Tac Toe game \n\n "
   end
 
   def self.ask_player_name(player_number)
@@ -32,16 +28,13 @@ class Game
   def self.choose_signs
     puts 'Computer will randomly choose sign for players, please wait ... '
     show_progress
-    puts
-    puts
-    puts
+    puts "\n\n\n "
     generate_random_signs
   end
 
   def announce_players
-    puts "#{@player1.name}(#{@player1.sign}) -- vs -- #{@player2.name}(#{@player2.sign})"
-    puts
-    sleep 1
+    puts "#{@player1.name}(#{@player1.sign}) -- vs -- #{@player2.name}(#{@player2.sign}) \n"
+    sleep 2
   end
 
   def winner?
@@ -51,16 +44,13 @@ class Game
 
     @board.wining_combinations.each do |arr|
       winner_name = get_winner_name(arr, board_elements, @player1)
-
       break if winner_name
 
       winner_name = get_winner_name(arr, board_elements, @player2)
-
       break if winner_name
     end
 
     winner_name = 'Draw' if winner_name.nil? && (@choosed_nums.length == 9)
-
     winner_name
   end
 
@@ -68,18 +58,15 @@ class Game
     announce_players
     @board.show_board
 
-    # check_players_order(@player1, @player2)
     @toggler = 0
 
     until winner?
-
       current_player = check_players_order(@player1, @player2)[@toggler]
       num = current_player.make_move(@choosed_nums)
       @board.update_board(num, current_player.sign)
       @toggler = @toggler.zero? ? 1 : 0
-
     end
 
-    puts "#{winner?} is winner !!!"
+    puts winner? == 'Draw' ? 'Draw. try again' : "#{winner?} is winner !!!"
   end
 end
