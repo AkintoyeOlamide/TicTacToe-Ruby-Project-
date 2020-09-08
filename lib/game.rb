@@ -16,18 +16,6 @@ class Game
     @choosed_nums = Set.new
   end
 
-  private
-
-  def get_winner_name(combinations, board, player)
-    winner_name = player.name if combinations.all? do |num|
-      finded_element_from_board = board.find { |el| el.include? :"#{num}" }
-      finded_element_from_board[:"#{num}"] == player.sign
-    end
-    winner_name
-  end
-
-  public
-
   def self.choose_signs
     show_progress
     generate_random_signs
@@ -66,6 +54,16 @@ class Game
     end
 
     winner_name = 'Draw' if winner_name.nil? && (@choosed_nums.length == 9)
+    winner_name
+  end
+
+  private
+
+  def get_winner_name(combinations, board, player)
+    winner_name = player.name if combinations.all? do |num|
+      finded_element_from_board = board.find { |el| el.include? :"#{num}" }
+      finded_element_from_board[:"#{num}"] == player.sign
+    end
     winner_name
   end
 end

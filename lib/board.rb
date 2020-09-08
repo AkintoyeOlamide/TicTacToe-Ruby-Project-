@@ -16,24 +16,24 @@ class Board
   end
 
   def show_board
-    puts '+---------------------------+'
+    output = "+------------------------+\n"
 
     @squares.each do |arr|
-      print '|'
+      output += '|'
       arr.each do |el|
         el.each do |key, value|
-          if value
-            print " #{key} - #{value == 'x' ? "\u{274C}" : "\u2B55"}  "
-          else
-            print " #{key} - \u{2754}  "
-          end
+          output += if value
+                      " #{key} - #{value == 'x' ? "\u{274C}" : "\u2B55"} "
+                    else
+                      " #{key} - \u{2754} "
+                    end
         end
       end
-      print '|'
-      puts
+      output += "| \n"
     end
 
-    puts '+---------------------------+'
+    output += '+------------------------+'
+    output
   end
 
   # getting number and sign to update the board
@@ -46,8 +46,6 @@ class Board
       end
     end
 
-    puts "\n\n"
     show_board
-    puts "\n\n"
   end
 end

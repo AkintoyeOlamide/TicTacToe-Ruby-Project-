@@ -40,7 +40,7 @@ sleep 2
 
 tic_tac_toe = Game.new(player1, player2)
 
-tic_tac_toe.board.show_board
+puts tic_tac_toe.board.show_board
 
 until tic_tac_toe.winner?
   current_player = tic_tac_toe.getcurrent_player[@toggler]
@@ -62,7 +62,10 @@ until tic_tac_toe.winner?
     res = tic_tac_toe.validate_move(num)
   end
 
-  tic_tac_toe.board.update_board(num, current_player.sign)
+  puts "\n\n"
+  puts tic_tac_toe.board.update_board(num, current_player.sign)
+  puts "\n\n"
+
   @toggler = @toggler.zero? ? 1 : 0
 end
 
