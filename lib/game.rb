@@ -57,7 +57,7 @@ class Game
 
     winner_name = nil
 
-    Board.wining_combinations.each do |arr|
+    @board.wining_combinations.each do |arr|
       winner_name = get_winner_name(arr, board_elements, @player1)
       break if winner_name
 
