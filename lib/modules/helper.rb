@@ -4,6 +4,7 @@ module Helper
       print("\rPercentage: ", "#{i}%")
       sleep(0.03)
     end
+    puts "\n\n\n "
   end
 
   def generate_random_signs
@@ -22,13 +23,5 @@ module Helper
     end
 
     [first_player, second_player]
-  end
-
-  def get_winner_name(combinations, board, player)
-    winner_name = player.name if combinations.all? do |num|
-      finded_element_from_board = board.find { |el| el.include? :"#{num}" }
-      finded_element_from_board[:"#{num}"] == player.sign
-    end
-    winner_name
   end
 end

@@ -1,5 +1,11 @@
 class Board
-  attr_reader :squares, :wining_combinations
+  attr_reader :squares
+
+  @@WINING_COMBINATIONS = [
+    [1, 2, 3], [4, 5, 6], [7, 8, 9],
+    [1, 4, 7], [2, 5, 8], [3, 6, 9],
+    [1, 5, 9], [3, 5, 7]
+  ]
 
   def initialize
     @squares = [
@@ -7,12 +13,10 @@ class Board
       [{ '4': nil }, { '5': nil }, { '6': nil }],
       [{ '7': nil }, { '8': nil }, { '9': nil }]
     ]
+  end
 
-    @wining_combinations = [
-      [1, 2, 3], [4, 5, 6], [7, 8, 9],
-      [1, 4, 7], [2, 5, 8], [3, 6, 9],
-      [1, 5, 9], [3, 5, 7]
-    ]
+  def self.wining_combinations
+    @@WINING_COMBINATIONS
   end
 
   def show_board
