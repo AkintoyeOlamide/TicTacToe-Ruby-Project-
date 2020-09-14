@@ -1,5 +1,5 @@
-require '../lib/game'
-require '../lib/player'
+require './lib/game'
+require './lib/player'
 
 RSpec.describe 'Game methods' do
   let(:player1) { Player.new('Lamia', 'x') }

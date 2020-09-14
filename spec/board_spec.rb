@@ -1,4 +1,4 @@
-require '../lib/board'
+require './lib/board'
 
 RSpec.describe 'Board methods' do
   output = "+------------------------+\n"
