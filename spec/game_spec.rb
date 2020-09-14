@@ -12,18 +12,18 @@ RSpec.describe 'Game methods' do
 
     context 'Validate the moves' do
        
-        # it 'check for the numbers' do            
-        #     expect(game.validate_move(3)).to eql(3)             
+        it 'check for the numbers' do            
+            expect(game.validate_move(3)).to eql(3)             
                
-        # end
-        # it 'check for the strings' do
-        #     # p game.validate_move('abc')
-        #     expect(game.validate_move('abc')).to eql(-2)        
-        # end
+        end
+        it 'check for the strings' do
+            # p game.validate_move('abc')
+            expect(game.validate_move('abc')).to eql(-2)        
+        end
 
         it 'will be unique numbers' do
-            game.choosed_nums
-            # expect(game.validate_move(5)).to eql(-1)
+            game.choosed_nums = [5]
+            expect(game.validate_move(5)).to eql(-1)
         end
 
     end
