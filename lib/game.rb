@@ -8,7 +8,8 @@ class Game
   include Helper
 
   attr_reader :board
-  attr_accessor :choosed_nums
+  attr_writer :choosed_nums
+  
 
   def initialize(player1, player2)
     @player1 = player1
