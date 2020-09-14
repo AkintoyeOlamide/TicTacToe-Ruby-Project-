@@ -1,5 +1,6 @@
 class Board
   attr_reader :squares, :wining_combinations
+  attr_writer :squares
 
 
   def initialize
