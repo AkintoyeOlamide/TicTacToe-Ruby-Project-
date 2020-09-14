@@ -61,7 +61,6 @@ until tic_tac_toe.winner?
     num = gets.chomp.strip
     res = tic_tac_toe.validate_move(num)
   end
-  
 
   puts "\n\n"
   puts tic_tac_toe.board.update_board(num, current_player.sign)

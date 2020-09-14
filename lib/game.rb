@@ -9,7 +9,6 @@ class Game
 
   attr_reader :board
   attr_accessor :choosed_nums
-  
 
   def initialize(player1, player2)
     @player1 = player1
@@ -27,7 +26,7 @@ class Game
     name.length >= 3
   end
 
-  def validate_move(num)   
+  def validate_move(num)
     if @choosed_nums.include?(num)
       -1
     elsif num.to_i < 1 || num.to_i > 9

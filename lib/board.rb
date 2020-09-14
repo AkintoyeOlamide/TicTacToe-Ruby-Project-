@@ -2,7 +2,6 @@ class Board
   attr_reader :squares, :wining_combinations
   attr_writer :squares
 
-
   def initialize
     @squares = [
       [{ '1': nil }, { '2': nil }, { '3': nil }],
