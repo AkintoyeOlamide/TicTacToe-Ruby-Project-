@@ -1,49 +1,33 @@
-require './lib/board'
+require './lib/board.rb'
 
-RSpec.describe 'Board methods' do
-  output = "+------------------------+\n"
-
-  9.times do |num|
-    output += '|' if (num + 1) == 1 || (num + 1) == 4 || num + 1 == 7
-    output += " #{num + 1} - \u{2754} "
-    output += "| \n" if (num + 1) % 3 == 0
+RSpec.describe 'testing the board' do
+  it 'should show us an empty board' do
+    expect(Board.new.show_board).to eq("+------------------------+\n| 1 - ❔  2 - ❔  3 - ❔ | \n| 4 - ❔  5 - ❔  6 - ❔ | \n| 7 - ❔  8 - ❔  9 - ❔ | \n+------------------------+")
   end
 
-  output += '+------------------------+'
-
-  # updated board for x
-
-  updated_board_x = "+------------------------+\n"
-
-  9.times do |num|
-    updated_board_x += '|' if (num + 1) == 1 || (num + 1) == 4 || num + 1 == 7
-    updated_board_x += (num + 1) == 5 ? " #{num + 1} - \u{274C} " : " #{num + 1} - \u{2754} "
-    updated_board_x += "| \n" if (num + 1) % 3 == 0
+  it 'should show us an empty board' do
+    expect(Board.new.show_board).not_to eq("+------------------------+\n| 1 - p  2 - ❔  3 - ❔ | \n| 4 - ❔  5 - ❔  6 - ❔ | \n| 7 - ❔  8 - ❔  9 - ❔ | \n+------------------------+")
   end
 
-  updated_board_x += '+------------------------+'
+  context 'update board methods' do
+    it 'should return a board with an input in 5th position' do
+      expect(Board.new.update_board(5, 'x')).not_to eq("+------------------------+\n| 1 - ❔  2 - x  3 - ❔ | \n| 4 - ❔  5 - ❌  6 - ❔ | \n| 7 - ❔  8 - ❔  9 - ❔ | \n+------------------------+")
+    end
 
-  # updated board for o
+    it 'should return a board with an input in 5th position' do
+      expect(Board.new.update_board(5, 'x')).to eq("+------------------------+\n| 1 - ❔  2 - ❔  3 - ❔ | \n| 4 - ❔  5 - ❌  6 - ❔ | \n| 7 - ❔  8 - ❔  9 - ❔ | \n+------------------------+")
+    end
 
-  updated_board_o = "+------------------------+\n"
+    it 'should return a board with an "o" in 5h position if 9th position is x' do
+      board = Board.new
+      board.update_board(9, 'x')
+      expect(board.update_board(5, 'o')).to eq("+------------------------+\n| 1 - ❔  2 - ❔  3 - ❔ | \n| 4 - ❔  5 - ⭕  6 - ❔ | \n| 7 - ❔  8 - ❔  9 - ❌ | \n+------------------------+")
+    end
 
-  9.times do |num|
-    updated_board_o += '|' if (num + 1) == 1 || (num + 1) == 4 || num + 1 == 7
-    updated_board_o += (num + 1) == 5 ? " #{num + 1} - \u2B55 " : " #{num + 1} - \u{2754} "
-    updated_board_o += "| \n" if (num + 1) % 3 == 0
-  end
-
-  updated_board_o += '+------------------------+'
-
-  it 'should print empty board' do
-    expect(Board.new.show_board).to eq(output)
-  end
-
-  it 'should print x for 5 th position if sign is x' do
-    expect(Board.new.update_board(5, 'x')).to eq(updated_board_x)
-  end
-
-  it 'should print o for 5 th position if sign is o' do
-    expect(Board.new.update_board(5, 'o')).to eq(updated_board_o)
+    it 'should return a board with an "o" in 5h position if 9th position is x' do
+      board = Board.new
+      board.update_board(9, 'x')
+      expect(board.update_board(5, 'o')).not_to eq("+------------------------+\n| 1 - ❔  2 - ❔  3 - ❔ | \n| 4 - ❔  5 - X  6 - ❔ | \n| 7 - ❔  8 - ❔  9 - ❌ | \n+------------------------+")
+    end
   end
 end
