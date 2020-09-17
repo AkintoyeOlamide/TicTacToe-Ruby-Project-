@@ -1,67 +1,59 @@
 require './lib/game.rb'
 require './lib/player.rb'
 
-RSpec.describe "testing the game methods" do
-    let(:player1) { Player.new('Grace', 'x') }
-     let(:player2) { Player.new('Olamide', 'o')} 
-     let(:game) { Game.new(player1, player2)} 
+RSpec.describe 'testing the game methods' do
+  let(:player1) { Player.new('Grace', 'x') }
+  let(:player2) { Player.new('Olamide', 'o') }
+  let(:game) { Game.new(player1, player2) }
 
-     it "it chooses sign for players" do
-        arr =  Game.choose_signs
-        expect(arr.sort).to eq(['x', 'o'].sort)
-         
-     end
-    
+  it 'it chooses sign for players' do
+    arr = Game.choose_signs
+    expect(arr.sort).to eq(%w[x o].sort)
+  end
 
-     context 'validate the players move' do     
-         it "should check the moves between 1 to 9" do
-            expect(game.validate_move(6)).to eq(6)   
-         end
+  context 'validate the players move' do
+    it 'should check the moves between 1 to 9' do
+      expect(game.validate_move(6)).to eq(6)
+    end
 
-         it "should check if number is invalid" do
-            expect(game.validate_move('p')).to eq(-2)   
-         end
-      end
+    it 'should check if number is invalid' do
+      expect(game.validate_move('p')).to eq(-2)
+    end
+  end
 
-      it "validates player name if greater than 3" do
-         expect(Game.validate_name('Grace')).to be(true)
-      end
+  it 'validates player name if greater than 3' do
+    expect(Game.validate_name('Grace')).to be(true)
+  end
 
-      it "validates player name if not less than 3" do
-         expect(Game.validate_name('ab')).to be(false)
-      end
-   
-      it 'get the current player' do
-         expect(player1.name).to eq('Grace')
-         expect(player1.sign).to eq('x')
-      end
+  it 'validates player name if not less than 3' do
+    expect(Game.validate_name('ab')).to be(false)
+  end
 
-      context 'Check Winner' do
-         it 'Horizontal' do
-            game.board.update_board(1, 'x')
-            game.board.update_board(2, 'x')
-            game.board.update_board(3, 'x')
-            expect(game.winner?).to eq('Grace')
-         end
+  it 'get the current player' do
+    expect(player1.name).to eq('Grace')
+    expect(player1.sign).to eq('x')
+  end
 
-         it 'Vertical' do
-            game.board.update_board(1, 'o')
-            game.board.update_board(4, 'o')
-            game.board.update_board(7, 'o')
-            expect(game.winner?).to eq('Olamide')
-         end
+  context 'Check Winner' do
+    it 'Horizontal' do
+      game.board.update_board(1, 'x')
+      game.board.update_board(2, 'x')
+      game.board.update_board(3, 'x')
+      expect(game.winner?).to eq('Grace')
+    end
 
-         it 'Diagonal' do
-            game.board.update_board(1, 'o')
-            game.board.update_board(5, 'o')
-            game.board.update_board(9, 'o')
-            expect(game.winner?).to eq('Olamide')
-         end
+    it 'Vertical' do
+      game.board.update_board(1, 'o')
+      game.board.update_board(4, 'o')
+      game.board.update_board(7, 'o')
+      expect(game.winner?).to eq('Olamide')
+    end
 
-      end
-   
-
-   
-     
-    
+    it 'Diagonal' do
+      game.board.update_board(1, 'o')
+      game.board.update_board(5, 'o')
+      game.board.update_board(9, 'o')
+      expect(game.winner?).to eq('Olamide')
+    end
+  end
 end
