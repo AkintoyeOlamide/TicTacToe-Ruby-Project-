@@ -20,18 +20,17 @@ RSpec.describe 'testing the game methods' do
     it 'should check the moves between 1 to 9' do
       expect(game.validate_move(6)).not_to eq(9)
     end
-    
-      it 'should check the moves between 1 to 9' do
-        expect(game.validate_move(6)).to eq(6)
-      end
-      
+
+    it 'should check the moves between 1 to 9' do
+      expect(game.validate_move(6)).to eq(6)
+    end
 
     it 'should check if number is invalid' do
       expect(game.validate_move('p')).to eq(-2)
     end
 
     it 'should check if number is invalid' do
-      expect(game.validate_move('p')).not_to eq(-5)
+      expect(game.validate_move('y')).not_to eq(-5)
     end
   end
 
@@ -60,6 +59,7 @@ RSpec.describe 'testing the game methods' do
     expect(player1.name).not_to eq('paul')
     expect(player1.sign).not_to eq('o')
   end
+  # rubocop:disable Metrics/BlockLength: Block has too many lines
 
   context 'Check Winner' do
     it 'Horizontal' do
@@ -71,7 +71,7 @@ RSpec.describe 'testing the game methods' do
 
     it 'Horizontal' do
       game.board.update_board(1, 'o')
-      game.board.update_board(2, 'o')
+      game.board.update_board(2, 'x')
       game.board.update_board(3, 'o')
       expect(game.winner?).not_to eq('paul')
     end
@@ -105,3 +105,4 @@ RSpec.describe 'testing the game methods' do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength: Block has too many lines
