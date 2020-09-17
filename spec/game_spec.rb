@@ -35,6 +35,18 @@ RSpec.describe "testing the game methods" do
          expect(player1.name).to eq('Grace')
          expect(player1.sign).to eq('x')
       end
+
+      context 'Check Winner' do
+         it 'Horizontal' do
+            game.board.update_board(1, 'x')
+            game.board.update_board(2, 'x')
+            game.board.update_board(3, 'x')
+            expect(game.winner?).to eq('Grace')
+         end
+
+
+
+      end
    
 
    
