@@ -14,13 +14,17 @@ RSpec.describe "testing the game methods" do
     
 
      context 'validate the players move' do     
-         it "it should check the moves between 1 to 9" do
+         it "should check the moves between 1 to 9" do
             expect(game.validate_move(6)).to eq(6)   
          end
 
-         it "it should check if number is invalid" do
+         it "should check if number is invalid" do
             expect(game.validate_move('p')).to eq(-2)   
          end
+      end
+
+      it "it validates player name is greater than 3" do
+         expect(Game.validate_name('Grace')).to be(true)
       end
 
    
