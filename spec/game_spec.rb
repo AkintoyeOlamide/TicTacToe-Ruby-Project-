@@ -27,10 +27,14 @@ RSpec.describe "testing the game methods" do
          expect(Game.validate_name('Grace')).to be(true)
       end
 
-      it "validates player name is not less than 3" do
+      it "validates player name if not less than 3" do
          expect(Game.validate_name('ab')).to be(false)
       end
    
+      it 'get the current player' do
+         expect(player1.name).to eq('Grace')
+         expect(player1.sign).to eq('x')
+      end
    
 
    
