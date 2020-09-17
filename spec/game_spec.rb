@@ -52,13 +52,20 @@ RSpec.describe 'testing the game methods' do
 
   it 'get the current player' do
     expect(player1.name).to eq('Grace')
+  end
+
+  it 'get the current player' do
     expect(player1.sign).to eq('x')
   end
 
   it 'get the current player' do
     expect(player1.name).not_to eq('paul')
+  end
+
+  it 'get the current player' do
     expect(player1.sign).not_to eq('o')
   end
+
   # rubocop:disable Metrics/BlockLength: Block has too many lines
 
   context 'Check Winner' do
