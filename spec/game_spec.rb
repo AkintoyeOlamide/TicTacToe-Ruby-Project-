@@ -23,9 +23,15 @@ RSpec.describe "testing the game methods" do
          end
       end
 
-      it "it validates player name is greater than 3" do
+      it "validates player name if greater than 3" do
          expect(Game.validate_name('Grace')).to be(true)
       end
+
+      it "validates player name is not less than 3" do
+         expect(Game.validate_name('ab')).to be(false)
+      end
+   
+   
 
    
      
