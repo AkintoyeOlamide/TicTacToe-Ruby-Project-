@@ -44,7 +44,19 @@ RSpec.describe "testing the game methods" do
             expect(game.winner?).to eq('Grace')
          end
 
+         it 'Vertical' do
+            game.board.update_board(1, 'o')
+            game.board.update_board(4, 'o')
+            game.board.update_board(7, 'o')
+            expect(game.winner?).to eq('Olamide')
+         end
 
+         it 'Diagonal' do
+            game.board.update_board(1, 'o')
+            game.board.update_board(5, 'o')
+            game.board.update_board(9, 'o')
+            expect(game.winner?).to eq('Olamide')
+         end
 
       end
    
